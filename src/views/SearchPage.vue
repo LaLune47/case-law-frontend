@@ -36,7 +36,7 @@
                   </div>
                   <div class="timeItem">
                       <el-checkbox-group v-model="checkList.time">
-                          <el-checkbox :label="item.year" v-for="(item, index) in filtersYear"
+                          <el-checkbox :label="item.year" :value="item.val" v-for="(item, index) in filtersYear"
                               :key="index" />
                       </el-checkbox-group>
                   </div>
@@ -184,7 +184,7 @@ setup() {
     { year: '2023' , val: 2023 },
     { year: '2022' , val: 2022 },
     { year: '2021' , val: 2021 },
-    { year: '2020及以前' , val: 2020 },
+    { year: '≤2020' , val: 2020 },
   ];
 
 
