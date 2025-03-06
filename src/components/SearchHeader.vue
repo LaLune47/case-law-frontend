@@ -24,7 +24,7 @@
  
  <style scoped>
     .header{
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
         height: 60px;
         display: flex;
@@ -53,6 +53,7 @@
 
     .rank-block{
         background-color: #fff;
+        color: #333
     }
 
     .rank-block:hover{

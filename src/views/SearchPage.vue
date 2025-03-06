@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background-color: #fff;">
       <div class="search" style="display: flex; align-items: center; gap: 10px; padding: 10px;">
           <input v-model="keyword" 
             class="search-input" 
@@ -36,9 +36,8 @@
                   </div>
                   <div class="timeItem">
                       <el-checkbox-group v-model="checkList.time">
-                          <el-checkbox :label="item.val" v-for="(item, index) in filtersYear"
+                          <el-checkbox :label="item.year" v-for="(item, index) in filtersYear"
                               :key="index" />
-
                       </el-checkbox-group>
                   </div>
               </div>
@@ -559,6 +558,7 @@ setup() {
 .rankL_title {
   font-weight: bold;
   font-size: 18px;
+  color: #333
 }
 
 .timeBox {
@@ -567,6 +567,7 @@ setup() {
 
 .timeTitle {
   font-weight: bold;
+  color: #333
 }
 
 .timeItem {
@@ -583,6 +584,7 @@ setup() {
   width: 100%;
   height: 40px;
   background-color: #fff;
+  color: #333;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -686,6 +688,7 @@ setup() {
 
 .rankR1Title {
   font-weight: bold;
+  color: #333
 }
 
 .rankR2 {
