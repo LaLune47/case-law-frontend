@@ -247,7 +247,7 @@ Mock.mock('/api/source-analytics', 'get', () => {
 });
 
 
-Mock.mock('/api/status', 'get', () => {
+Mock.mock('/apiB/status', 'get', () => {
     // Mock data for source analytics (ECharts pie chart)
 
     const data = {

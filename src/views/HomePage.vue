@@ -52,7 +52,7 @@ export default {
 
     const fetchStats = async () => {
       axios
-        .get(`/api/status`)
+        .get(`/apiB/status`)
         .then(response => {
           console.log(response)
           totalCase.value = response.data.current_stats.collection_stats.after.court_case;

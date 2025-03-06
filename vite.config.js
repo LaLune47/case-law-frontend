@@ -26,6 +26,13 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+
+
+      "/apiB": {
+        target: "http://34.17.84.20:5005", 
+        changeOrigin: true,
+        secure: false,
+      },
     },
   }
 })
