@@ -6,7 +6,7 @@
         <div class="stats-title">Total Case</div>
         <div class="stats-value">{{ totalCase }}</div>
         <div class="stats-change">
-          <span class="stats-num">{{ caseChange }}%</span>
+          <span class="stats-num">{{ caseChange }}</span>
           <span class="stats-text"> Up from yesterday</span>
         </div>
       </div>
@@ -16,7 +16,7 @@
         <div class="stats-title">Total Legislation</div>
         <div class="stats-value">{{ totalLegislation }}</div>
         <div class="stats-change">
-          <span class="stats-num">{{ legislationChange }}%</span>
+          <span class="stats-num">{{ legislationChange }}</span>
           <span class="stats-text"> Up from yesterday</span>
         </div>
       </div>
@@ -38,6 +38,7 @@
 <script>
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from '../utils/axios';
 
 export default {
   name: 'Home',
@@ -50,15 +51,18 @@ export default {
     const legislationChange = ref(0);
 
     const fetchStats = async () => {
-      try {
-        const response = await axios.get('https:/github.com/all');
-        totalCase.value = response.data.totalCase;
-        caseChange.value = response.data.caseChange;
-        totalLegislation.value = response.data.totalLegislation;
-        legislationChange.value = response.data.legislationChange;
-      } catch (error) {
-        console.error('Error fetching stats:', error);
-      }
+      axios
+        .get(`/api/status`)
+        .then(response => {
+          console.log(response)
+          totalCase.value = response.data.current_stats.collection_stats.after.court_case;
+          caseChange.value = response.data.current_stats.collection_stats.difference.court_case;
+          totalLegislation.value = response.data.current_stats.collection_stats.after.legislation;
+          legislationChange.value = response.data.current_stats.collection_stats.difference.legislation;
+        })
+        .catch(error => {
+          console.error('Error fetching stats:', error);
+        })
     };
 
     const toPath = (url) => {
