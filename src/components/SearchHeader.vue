@@ -1,8 +1,8 @@
 <template>
     <div class="header">
-        <div class="header-block home-block" @click="toPath('/')">Home</div>
-        <div class="header-block rank-block" @click="toPath('/search')">Rank Retrival</div>
-        <div class="header-block ai-block" @click="toPath('/chatbot')">AI Search</div>
+        <div class="header-block block" @click="toPath('/')">Home</div>
+        <div class="header-block block" @click="toPath('/search')">Rank Retrival</div>
+        <div class="header-block block" @click="toPath('/chatbot')">AI Search</div>
         <!-- <div @click="toPath('/about')">About</div> -->
    </div>
  </template>
@@ -42,29 +42,12 @@
     
     }
 
-    .home-block{
-        background-color: #fff;
-
-    }
-
-    .home-block:hover{
-        background-color: #f0f0f0;
-    }
-
-    .rank-block{
+    .block{
         background-color: #fff;
         color: #333
     }
 
-    .rank-block:hover{
-        background-color: #f0f0f0;
-    }
-
-    .ai-block{
-        background-color: #fff;
-    }
-
-    .ai-block:hover{
+    .block:hover{
         background-color: #f0f0f0;
     }
  </style>

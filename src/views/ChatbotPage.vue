@@ -1,20 +1,20 @@
 <template>
     <div class="chat">
         <div style="width: 80%;margin: 0 auto;">
-            <div style="padding-top: 30px;font-weight: bold;font-size: 20px;">What will happen if I steal a car?</div>
+            <div style="padding-top: 30px;font-weight: bold;font-size: 20px;color:#333;">What will happen if I steal a car?</div>
 
 
             <!-- 显示聊天记录 -->
             <div class="messagesBox">
                 <div class="messageItem" v-for="(item, index) in messages" key="index">
                     <div style="margin-top: 10px;padding: 15px;">
-                        <el-row :gutter="20">
+                        <!-- <el-row :gutter="20">
                             <el-col :span="6" v-for="(link) in item.links">
                                 <div class="links">
                                     <div>{{ link}}</div>
                                 </div>
                             </el-col>
-                        </el-row>
+                        </el-row> -->
                         <div class="message">
                             Original question: 
                             <br />
@@ -160,5 +160,6 @@ export default {
 .message {
     font-size: 14px;
     margin-bottom: 5px;
+    color: #333;
 }
 </style>
