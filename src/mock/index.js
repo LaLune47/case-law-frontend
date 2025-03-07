@@ -293,3 +293,16 @@ Mock.mock(/\/api\/aisearch/, 'get', (options) => {
     answer: "You will be sentenced to ten years in prison.",
   };
 });
+
+
+Mock.mock(/\/api\/autocomplete/, 'get', (options) => {
+    // 解析 URL 参数
+    const url = new URL(options.url, window.location.origin);
+    const input = url.searchParams.get("input") || "";
+
+    console.log(" autocomplete API 被调用！");
+    console.log("input:", input);
+  return {
+    complicated_input: "这是补全后的输入",
+  };
+});

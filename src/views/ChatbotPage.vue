@@ -19,6 +19,16 @@
             <!-- 动态聊天部分 -->
             <div class="search">
                 <textarea v-model="message" placeholder="Message to..."></textarea>
+
+                <div class="hintString">
+                    <span>提示信息</span>
+                </div>
+
+                <div class="hintBtn" @click="getHint" :class="{ 'disabled': !message.trim() }"
+                    :disabled="!message.trim()">
+                    <span>Hint</span>
+                </div>
+
                 <div class="sendBtn" @click="sendMessage" :class="{ 'disabled': !message.trim() }"
                     :disabled="!message.trim()">
                     <span>Send</span>
@@ -41,6 +51,7 @@ export default {
     // 使用 ref 来定义响应式数据
     const message = ref('');  // 当前输入的消息
     const messages = ref([]); // 存储所有的聊天记录
+    const hint = ref('')
 
     // 发送消息
     const sendMessage = () => {
@@ -63,6 +74,23 @@ export default {
       }
     };
 
+    // 得到补全的string
+    const getHint = () => {
+      if (message.value.trim()) {
+        const userMessage = message.value
+
+        axios
+        .get('/api/autocomplete',  { params: { input: userMessage } })
+        .then(res => {
+            console.log(res)
+            hint.value = res.complicated_input
+        })
+        .catch(error => {
+            console.error("Error complicated input:", error);
+        });
+      }
+    };
+
     // 获取 message列表里的消息
     const getAIResponse = (msg) => {
         const foundMessage = messages.value.find(m => m.question === msg);
@@ -74,7 +102,8 @@ export default {
       message,
       messages,
       sendMessage,
-      getAIResponse
+      getAIResponse,
+      getHint
     };
   }
 };
@@ -105,6 +134,44 @@ export default {
     resize: none;
     width: 100%;
     height: 100%;
+}
+
+.hintString {
+    height: 30px;
+    background-color: #8e9cd4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    right: 170px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+
+.hintBtn {
+    width: 80px;
+    height: 30px;
+    background-color: #4F80F9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 50px;
+    position: absolute;
+    bottom: 0;
+    right: 85px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.hintBtn.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
 .sendBtn {
