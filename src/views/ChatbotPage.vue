@@ -8,18 +8,6 @@
             <div class="messagesBox">
                 <div class="messageItem" v-for="(item, index) in messages" key="index">
                     <div style="margin-top: 10px;padding: 15px;">
-                        <!-- <el-row :gutter="20">
-                            <el-col :span="6" v-for="(link) in item.links">
-                                <div class="links">
-                                    <div>{{ link}}</div>
-                                </div>
-                            </el-col>
-                        </el-row> -->
-                        <div class="message">
-                            Original question: 
-                            <br />
-                            {{ item.question }}
-                        </div>
                         <div class="message">
                             AI: 
                             <br />
@@ -60,13 +48,13 @@ export default {
         const userMessage = message.value
         message.value = '';  // 清空输入框
 
-        axios.post('/api/chatbot', { question: userMessage })
+        axios
+        .get('/api/aisearch',  { params: { input: userMessage } })
         .then(res => {
             console.log(res)
             messages.value.push({
-                question: userMessage,
+                input: userMessage,
                 answer: res.answer,
-                links: res.links
             });
         })
         .catch(error => {
@@ -75,7 +63,7 @@ export default {
       }
     };
 
-    // 获取 AI 回复（可以根据需要扩展这个方法，模拟不同的回答逻辑）
+    // 获取 message列表里的消息
     const getAIResponse = (msg) => {
         const foundMessage = messages.value.find(m => m.question === msg);
         return foundMessage ? foundMessage : "Generating response...";

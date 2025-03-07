@@ -282,18 +282,14 @@ Mock.mock(/\/api\/document\?doc_id=\d+/, 'get', (options) => {
 });
 
 
-Mock.mock('/api/chatbot', 'post', () => {
-  // Mock data for filter options
+Mock.mock(/\/api\/aisearch/, 'get', (options) => {
+    // 解析 URL 参数
+    const url = new URL(options.url, window.location.origin);
+    const input = url.searchParams.get("input") || "";
+
+    console.log(" aisearch API 被调用！");
+    console.log("input:", input);
   return {
-    answer: "This is the chatbot's response based on your question.This is the chatbot's response based on your question.This is the chatbot's response based on your question.This is the chatbot's response based on your question.This is the chatbot's response based on your question.This is the chatbot's response based on your question.This is the chatbot's response based on your question.This is the chatbot's response based on your question.This is the chatbot's response based on your question.This is the chatbot's response based on your question.This is the chatbot's response based on your question.",
-    links: [
-      "https://example.com/article1" ,
-      "https://example.com/article2" ,
-      "https://example.com/article3" ,
-      "https://example.com/article4" ,
-      "https://example.com/article5" ,
-      "https://example.com/article6" ,
-      "https://example.com/article7" ,
-    ],
+    answer: "You will be sentenced to ten years in prison.",
   };
 });
