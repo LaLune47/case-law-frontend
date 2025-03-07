@@ -20,8 +20,8 @@
             <div class="search">
                 <textarea v-model="message" placeholder="Message to..."></textarea>
 
-                <div class="hintString">
-                    <span>提示信息</span>
+                <div class="hintString" @click="useHint">
+                    <span>提示信息 {{ hint }}</span>
                 </div>
 
                 <div class="hintBtn" @click="getHint" :class="{ 'disabled': !message.trim() }"
@@ -91,6 +91,12 @@ export default {
       }
     };
 
+    const useHint = () => {
+        message.value = hint.value
+        hint.value = '';
+        sendMessage()
+    }
+
     // 获取 message列表里的消息
     const getAIResponse = (msg) => {
         const foundMessage = messages.value.find(m => m.question === msg);
@@ -103,7 +109,9 @@ export default {
       messages,
       sendMessage,
       getAIResponse,
-      getHint
+      getHint,
+      useHint,
+      hint
     };
   }
 };
