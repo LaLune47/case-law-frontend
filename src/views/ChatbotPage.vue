@@ -1,7 +1,7 @@
 <template>
     <div class="chat">
         <div style="width: 80%;margin: 0 auto;">
-            <div style="padding-top: 30px;font-weight: bold;font-size: 20px;color:#333;">What will happen if I steal a car?</div>
+            <div style="padding-top: 30px;font-weight: bold;font-size: 20px;color:#333;">AI search</div>
 
 
             <!-- 显示聊天记录 -->
@@ -9,8 +9,6 @@
                 <div class="messageItem" v-for="(item, index) in messages" key="index">
                     <div style="margin-top: 10px;padding: 15px;">
                         <div class="message">
-                            AI: 
-                            <br />
                             {{ item.answer }}
                         </div>
                     </div>
@@ -18,11 +16,13 @@
             </div>
             <!-- 动态聊天部分 -->
             <div class="search">
-                <textarea v-model="message" placeholder="Message to..."></textarea>
+                <textarea v-model="message" placeholder="Get Legal Answers from AI..."></textarea>
 
-                <div class="hintString" @click="useHint">
-                    <span>提示信息 {{ hint }}</span>
-                </div>
+                <el-tooltip  v-if="hint" style="margin: 4px;" effect="light" content="Click to apply query completion results" placement="top">
+                    <div class="hintString" @click="useHint">
+                        <span>{{ hint }}</span>
+                    </div>
+                </el-tooltip>
 
                 <div class="hintBtn" @click="getHint" :class="{ 'disabled': !message.trim() }"
                     :disabled="!message.trim()">
