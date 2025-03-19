@@ -247,6 +247,29 @@ Mock.mock('/api/source-analytics', 'get', () => {
 });
 
 
+Mock.mock('/apiB/status', 'get', () => {
+    // Mock data for source analytics (ECharts pie chart)
+
+    const data = {
+        "current_stats" :{
+            "collection_stats" :{
+                "after":{
+                    "court_case":9000,
+                    "legislation":8000,
+                },
+                "difference":{
+                    "court_case":20,
+                    "legislation":100,
+                }
+            }
+        }
+    };
+
+    return {
+        data
+    };
+  });
+
 
 Mock.mock(/\/api\/document\?doc_id=\d+/, 'get', (options) => {
   // 解析 URL 参数
