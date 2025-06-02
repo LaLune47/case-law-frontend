@@ -15,4 +15,24 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
+
+  server: {
+    host: '0.0.0.0',
+    port:5173,
+
+    proxy: {
+      "/api": {
+        target: "http://34.17.84.20:5001", 
+        changeOrigin: true,
+        secure: false,
+      },
+
+
+      "/apiB": {
+        target: "http://34.17.84.20:5005", 
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  }
 })
